@@ -1,0 +1,61 @@
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="main.css">
+</head>
+
+<body>
+
+  <form action="" novalidate>
+    <p>
+      <label for="mail">Give mail:</label>
+      <input type="email" id="mail" name="mail" required minlength="8">
+      <span class="error" aria-live="polite"></span>
+    </p>
+
+    <button>Submit</button>
+  </form>
+
+</body>
+
+<script>
+  const email = document.querySelector('#mail');
+  const emailError = document.querySelector('.error');
+  const form = document.querySelector('form')
+  const button = document.querySelector('button')
+
+  email.addEventListener('input', function () {
+    if (!this.validity.valid) {
+      showError()
+    } else {
+      emailError.textContent = '';
+      emailError.className = "error"
+    }
+  })
+
+  form.addEventListener('submit', function (e) {
+    if (!email.validity.valid) {
+      e.preventDefault();
+      showError();
+    }
+  })
+
+  function showError() {
+    if (email.validity.valueMissing) {
+      emailError.textContent = "You need to enter an email address.";
+    } else if (email.validity.typeMismatch) {
+      emailError.textContent = "Entered value needs to be an email address.";
+    } else if (email.validity.tooShort) {
+      emailError.textContent = `Email should be at least ${email.minLength} characters; you entered ${email.value.length}.`;
+    }
+
+    emailError.className = "error active";
+  }
+</script>
+
+</html>

@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+</head>
+
+<body>
+  <main>
+    <h1>
+      Results
+    </h1>
+    <div id="results"></div>
+
+    <a href="/">go back</a>
+
+  </main>
+
+  <script>
+
+    const results = document.querySelector('#results');
+    const params = new URLSearchParams(window.location.search);
+    for (param of params.entries()) {
+      const div = document.createElement('div');
+      div.textContent = param;
+      results.append(div)
+    }
+
+  </script>
+
+</body>
+
+</html>
